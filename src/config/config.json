@@ -1,4 +1,5 @@
 {
+  "APIURL":"http://192.168.1.7/proderma/",
   "TOKENKEY":"token",
   "USERPROFILE":"userProfile"
 }

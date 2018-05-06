@@ -7,19 +7,22 @@
 
   <ion-content>
     <ion-list>
-      <button ion-item menuClose (click)="openPage(employeePage)">
+      <button ion-item menuClose (tap)="openPage(dashboardPage)">
+          Dashboard
+      </button>
+      <button ion-item menuClose (tap)="openPage(employeePage)">
         Employee
       </button>
-      <button ion-item menuClose (click)="openPage(registerPage)">
+      <button ion-item menuClose (tap)="openPage(registerPage)">
         Register
       </button>
-      <button ion-item menuClose (click)="openPage(areaPage)">
+      <button ion-item menuClose (tap)="openPage(areaPage)">
         Area
       </button>
-      <button ion-item menuClose (click)="openPage(paymentMethodsPage)">
+      <button ion-item menuClose (tap)="openPage(paymentMethodsPage)">
         Payment Methods
       </button>
-      <button ion-item menuClose (click)="logout()">
+      <button ion-item menuClose (tap)="logout()">
         Logout
       </button>
     </ion-list>

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
@@ -14,7 +14,6 @@ const Config = require('../../config/config.json');
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-let apiUrl = 'http://192.168.43.144/proderma/';
 
 @Injectable()
 export class AuthServiceProvider {
@@ -22,7 +21,7 @@ export class AuthServiceProvider {
   private errorObserver: any;
   public error: any;
   private token;
-
+  logNamespace
   constructor(public http: HttpClient, public storage: Storage) {
     console.log('Hello AuthServiceProvider Provider');
     console.log('CONFIG', localStorage.getItem(Config.TOKENKEY));
@@ -50,7 +49,7 @@ export class AuthServiceProvider {
   login(params) : Observable <Response> {
     let header = new HttpHeaders();
     // this.createAuthorizationHeader(header);
-    return this.http.post(apiUrl + 'api/Api_Login/login', JSON.stringify(params),{headers: header})
+    return this.http.post(Config.APIURL + 'api/Api_Login/login', JSON.stringify(params),{headers: header})
     .map(res => res)
     .catch(error => this.handleError(error));
   }
@@ -63,14 +62,15 @@ export class AuthServiceProvider {
 register(data) : Observable <boolean> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(apiUrl + 'api/register', JSON.stringify(data),{headers: headers})
+    return this.http.post(Config.APIURL + 'api/register', JSON.stringify(data),{headers: headers})
     .map(res => res)
     .catch(error => this.handleError(error));
 }
 
 listArea() : Observable <Response> {
     const header = this.createAuthorizationHeader();
-    return this.http.get(apiUrl + 'api/get_master_area', {headers: header})
+    const params =  new HttpParams().set('logNamespace', 'inoy');
+    return this.http.get(Config.APIURL + 'api/get_master_area', {params: params, headers: header})
     .map(res => res)
     .catch(error => this.handleError(error));
 }

@@ -5,6 +5,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { EmployeePage } from '../employee/employee';
 import { RegisterPage } from '../register/register';
 import { AreaPage } from '../area/area';
+import { DashboardPage } from '../dashboard/dashboard';
 declare var require: any; 
 const Config = require('../../config/config.json');
 
@@ -18,15 +19,17 @@ export class HomePage {
   private registerPage;
   private employeePage;
   private areaPage;
+  private dashboardPage;
 
-  @ViewChild(EmployeePage) employee : EmployeePage;
+  @ViewChild(DashboardPage) dashboard : DashboardPage;
 
   constructor(public navCtrl: NavController, public authService: AuthServiceProvider, public alertCtrl:AlertController, public toastCtrl:ToastController, public events: Events) {
     
-    this.rootPage = EmployeePage;
+    this.rootPage = DashboardPage;
     this.registerPage = RegisterPage;
     this.employeePage = EmployeePage;
     this.areaPage = AreaPage;
+    this.dashboardPage = DashboardPage;
   }
 
   ionOpened() {
@@ -38,6 +41,7 @@ export class HomePage {
 
   openPage(p) {
     this.rootPage = p;
+    //this.navCtrl.push(p);
   }
 
   ngAfterViewInit() {
